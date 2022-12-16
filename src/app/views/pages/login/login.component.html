@@ -1,0 +1,55 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="5">
+        <c-card-group>
+          <c-card class="p-4 text-center">
+            <c-card-body>
+              <form cForm [formGroup]="loginForm">
+                <h1>Login</h1>
+                <p class="text-medium-emphasis">Sign In to your account</p>
+                <c-input-group>
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input autocomplete="email" cFormControl placeholder="Email" formControlName="email" />
+                </c-input-group>
+                <small class="text-danger d-flex text-left my-0" 
+                *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
+                >El email es obligatorio.
+                </small>
+                <c-input-group class="mt-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    autoComplete="current-password"
+                    cFormControl
+                    placeholder="Password"
+                    type="password"
+                    formControlName="password"
+                  />
+                </c-input-group>
+                <small class="text-danger d-flex text-left my-0" 
+                *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
+                >La contraseña es obligatoria.
+                </small>
+                <small class="text-danger my-0" 
+                *ngIf="msgErrorLogin.length > 0 && loginForm.valid"
+                >{{ msgErrorLogin }}
+                </small>
+                <c-row class="mt-3">
+                  <c-col xs="12">
+                    <button cButton class="px-4" color="primary" (click)="login()" [disabled]="isLoadingLogin">
+                      Ingresar
+                    </button>
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
